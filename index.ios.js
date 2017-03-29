@@ -12,21 +12,30 @@ import {
   View
 } from 'react-native';
 
+import {createStore, applyMiddleware,combineReducers} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import {Provider} from 'react-redux'
+import test from './reducer/test.reducer';
+import App from './page/app';
+
+const rootReducer = combineReducers({
+  test
+})
+
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+
+function configureStore(initialState) {
+  const store = createStoreWithMiddleware(rootReducer, initialState);
+  return store;
+}
+
 export default class DriverRN extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+    return (<Provider store={configureStore()}>
+         
+          <App />
+
+        </Provider>
     );
   }
 }
