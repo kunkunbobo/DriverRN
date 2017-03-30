@@ -241,7 +241,7 @@ export default class KKNavigator extends Component {
         this.props.onChange("replace", route, path);
         this.refs.navigator.replace(route);
 
-       // this.enterNewView(path,{configureScene:ReplaceSceneAnimation});
+        // this.enterNewView(path,{configureScene:ReplaceSceneAnimation});
     }
 
     enterNewView(path,ops={}){
@@ -276,6 +276,7 @@ export default class KKNavigator extends Component {
     }
 
     componentDidMount(){
+
         if(this.props.dispatch){
             this.props.dispatch({
                 type:KKNAVIGATOR_INIT_FINISH,
@@ -285,8 +286,6 @@ export default class KKNavigator extends Component {
     }
 
     render() {
-
-        console.log("navigator refresh====")
         return (
             <Navigator
                 ref="navigator"
@@ -294,19 +293,16 @@ export default class KKNavigator extends Component {
                 initialRouteStack={this.props.routes}
                 routes={this.props.routes}
                 configureScene={(route, routeStack)=> {
-            return route.configureScene;
-        }}
+                    return route.configureScene;
+                 }}
                 onWillFocus={route=>{
-            // let callback=this.findEvenFromRoute("sceneWillFocus",route);
-            // if(callback){ callback(route);}
-        }
-                }
-                onDidFocus={route=>{
-                if(this.refs.navigator){
-                     console.log("this.refs.navigator.state.routeStack = ",this.refs.navigator.state.routeStack)
 
-                }
-        }}
+
+                }}
+                onDidFocus={route=>{
+
+
+                }}
                 renderScene={(route, navigator)=> {
 
             return <route.commpent

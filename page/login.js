@@ -36,8 +36,13 @@ export default class Login extends BasePage {
         this.props.dispatch(loginAction(this.state.name, this.state.password,(success,info)=>{
             if(success){
                 Alert.alert("提示","登录成功")
-              //  DeviceEventEmitter.emit(kLogin_Success)
+                DeviceEventEmitter.emit(kLogin_Success)
                // this.props.navigator.push('main')
+                //this.props.navigator.resetTo('main')
+                // setTimeout(()=>{
+                //
+                //     this.props.navigator.resetTo('login')
+                // },1000);
             }
             else{
                 this.setState({noticeText:info});

@@ -57,8 +57,8 @@ export  default class UserInfo extends Component {
 
             <DoneButton text="退 出" onPress={()=>{
                 this.props.dispatch(loginOut(()=>{
-                DeviceEventEmitter.emit(kLogout,null)
-                   // this.props.navigator.resetTo('login')
+                DeviceEventEmitter.emit(kLogout,null);
+      
                 }))
             }}/>
         </View>

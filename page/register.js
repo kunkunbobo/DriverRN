@@ -42,7 +42,6 @@ export default class Register extends BasePage {
             if(success){
                 Alert.alert("提示","注册成功")
                 DeviceEventEmitter.emit(kLogin_Success,null)
-                //this.props.navigator.push('main')
             }
             else{
                 this.setState({noticeText:info});
