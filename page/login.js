@@ -9,13 +9,15 @@ import {
     TouchableHighlight,
     Platform,
     TextInput,
-    Alert
+    Alert,
+    DeviceEventEmitter
 } from 'react-native';
 import {loginAction} from "../action/login.action"
 import {defaultColor,Size,fontSizes} from '../utility/themes'
 import DoneButton from './component/doneButton';
 import BasePage from './base/basePage';
 import {connect} from "react-redux";
+import {kLogin_Success} from '../utility/helper';
 
 @connect()
 export default class Login extends BasePage {
@@ -34,7 +36,8 @@ export default class Login extends BasePage {
         this.props.dispatch(loginAction(this.state.name, this.state.password,(success,info)=>{
             if(success){
                 Alert.alert("提示","登录成功")
-                this.props.navigator.push('main')
+              //  DeviceEventEmitter.emit(kLogin_Success)
+               // this.props.navigator.push('main')
             }
             else{
                 this.setState({noticeText:info});

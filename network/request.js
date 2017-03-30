@@ -2,6 +2,8 @@
  * Created by yzw on 2017/3/13.
  */
 
+import {getToken,isEmpty} from '../utility/helper';
+
 export default function Request(conf) {
 
     if (!conf) {
@@ -12,7 +14,10 @@ export default function Request(conf) {
         throw new Error("conf.url is required!");
     }
 
-    let targetUrl = conf.url;
+    return getToken().then(result=>{
+
+    let token =  isEmpty(result)?null: JSON.parse(result).token;
+    let targetUrl = window.$config.host + conf.url;
 
     // request method
     let method = (conf.type || "get").toUpperCase();
@@ -23,6 +28,9 @@ export default function Request(conf) {
     }
     else{
         headers=new Headers();
+    }
+    if(!isEmpty(token)){
+        headers.append("token",token);
     }
 
     if (method === "POST") {
@@ -35,5 +43,9 @@ export default function Request(conf) {
     }
     // request
     return fetch(targetUrl,options);
+
+
+});
+
 
 }

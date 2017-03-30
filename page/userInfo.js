@@ -8,6 +8,7 @@ import {
     View,
     TouchableHighlight,
     Image,
+    DeviceEventEmitter
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -16,6 +17,7 @@ import {defaultColor,Size ,fontSizes} from '../utility/themes';
 import DoneButton from './component/doneButton';
 import {loginOut} from '../action/login.action'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {kLogout} from '../utility/helper';
 
 @connect(({login})=>{
     return {
@@ -55,8 +57,8 @@ export  default class UserInfo extends Component {
 
             <DoneButton text="退 出" onPress={()=>{
                 this.props.dispatch(loginOut(()=>{
-                
-                    this.props.navigator.resetTo('login')
+                DeviceEventEmitter.emit(kLogout,null)
+                   // this.props.navigator.resetTo('login')
                 }))
             }}/>
         </View>

@@ -286,6 +286,7 @@ export default class KKNavigator extends Component {
 
     render() {
 
+        console.log("navigator refresh====")
         return (
             <Navigator
                 ref="navigator"

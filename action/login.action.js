@@ -9,10 +9,11 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export function loginAction(name,password,callBack) {
     return function (dispatch) {
         let config = {
-            url:"http://localhost:3000/login",
+            url:"/login",
             data:{
                 name,
-                password
+                password,
+                type:2
             },
             type:'post'
         }
@@ -23,7 +24,9 @@ export function loginAction(name,password,callBack) {
                 }
             })
             .then((data) => {
+
                 console.log(data)
+
                 if (data.success) {
 
                     dispatch({
@@ -55,7 +58,7 @@ export function registerAction(name,password,callBack) {
 
     return function (dispatch) {
         let config = {
-            url: "http://localhost:3000/register",
+            url: "/register",
             data: {
                 name,
                 password,

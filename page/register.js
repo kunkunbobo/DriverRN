@@ -13,13 +13,15 @@ import {
     Platform,
     TextInput,
     StatusBar,
-    Alert
+    Alert,
+    DeviceEventEmitter
 } from 'react-native';
 import {registerAction} from "../action/login.action"
 import {defaultColor,Size,fontSizes} from '../utility/themes'
 import DoneButton from './component/doneButton';
 import BasePage from './base/basePage';
 import {connect} from "react-redux";
+import {kLogin_Success} from '../utility/helper';
 
 @connect()
 export default class Register extends BasePage {
@@ -39,7 +41,8 @@ export default class Register extends BasePage {
         this.props.dispatch(registerAction(this.state.name,this.state.password,(success,info)=>{
             if(success){
                 Alert.alert("提示","注册成功")
-                this.props.navigator.push('main')
+                DeviceEventEmitter.emit(kLogin_Success,null)
+                //this.props.navigator.push('main')
             }
             else{
                 this.setState({noticeText:info});

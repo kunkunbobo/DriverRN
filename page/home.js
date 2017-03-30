@@ -12,7 +12,7 @@ import {
 
 import {connect} from 'react-redux';
 import KKNavigator from './navgation';
-import {isEmpty} from '../utility/helper';
+import {isEmpty,getToken} from '../utility/helper';
 import {KKNAVIGATOR_INIT_FINISH } from './navgation';
 
 @connect(({login,navigator})=>{
@@ -30,37 +30,29 @@ export default class Home extends Component {
 
     componentWillReceiveProps(props){
 
-
         if(props.route){
-
-            // AsyncStorage.getAllKeys((error, keys)=>{
-            //
-            //     console.log("AsyncStorage keys",keys)
-            // })
-            AsyncStorage.getItem("reduxPersist:login",(error, result)=>{
-                
+            getToken().then(result=>{
                 if(!isEmpty(result) && !isEmpty(JSON.parse(result).token) ){
-                    this.props.navigator.replace('main')
-
+                    this.props.navigator.resetTo('main')
                 }
                 else{
-                    this.props.navigator.replace('login')
-                }
+                    this.props.navigator.resetTo('login')
+                 }
                 this.props.dispatch({
                     type:KKNAVIGATOR_INIT_FINISH,
                     route:null
                 })
-            });
+         })
 
         }
     }
- 
+
     render() {
 
         return (
-             <View>
+            <View>
 
             </View>
-        );
+    );
     }
 }

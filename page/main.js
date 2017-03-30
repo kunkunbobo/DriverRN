@@ -18,25 +18,27 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {defaultColor} from '../utility/themes';
 import CarTrack  from './carTrack';
 import UserInfo from './userInfo';
+import {getCarList} from '../action/carInfo.action';
 
-@connect(({test})=>{
-    return {
-        test,
-    }
-})
 
+@connect()
 export default class Main extends Component {
 
 
     constructor(props){
         super(props);
+
+        console.log("===========1")
         this.state = {
             selectedTabIndex:0
         }
     }
 
     componentDidMount() {
+        console.log("===========2")
+        this.props.dispatch(getCarList((success,list)=>{
 
+            }));
     }
 
 
@@ -47,8 +49,7 @@ export default class Main extends Component {
 
     render() {
 
-        return  (
-            <View style={{flex:1,backgroundColor:'red'}}>
+        return  ( <View style={{flex:1,backgroundColor:'red'}}>
                 <TabNavigator tabBarStyle={{ backgroundColor:defaultColor.backgroundColor }} style={{backgroundColor: defaultColor.backgroundColor}}>
                     <TabNavigator.Item
                         title="车辆追踪"
